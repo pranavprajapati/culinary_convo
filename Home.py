@@ -7,7 +7,8 @@ from streamlit_extras.switch_page_button import switch_page
 #     page_icon="👋",
 # )
 
-st.title("Your Kitchen Companion👋")
+st.title("Culinary Convo👋")
+st.image("static/user_icon.png",width=32)
 
 cols = st.columns((2, 2))
 
