@@ -4,9 +4,10 @@ import os
 from langchain import OpenAI
 import validators
 import time
-from scrape_recipe import scrape_valid_recipe,check_ingredients
+from utilities import scrape_valid_recipe,check_ingredients,replace_ingredients
 from ingredientguru import get_suggestions
 from streamlit_extras.colored_header import colored_header
+import pywhatkit
 
 
 def is_valid_url(url):
@@ -32,7 +33,7 @@ def get_recipe_detils():
 initialize_session_state()
 st.title("Your own Flavor Companion 🤖")
 
-with st.form("my_form"):
+with st.form("my_replacement"):
 
     # Take user input and placeholder write full url of recipe
     recipe_link = st.text_input(label = 'What Recipe do you like ? ',placeholder= "Full url of recipe", key="recipe_link")
@@ -87,10 +88,11 @@ if st.session_state.recipe_displayed:
                 suggestions = get_suggestions(st.session_state.title,st.session_state.ingredients,st.session_state.instructions,replacements)
 
                 formatted_suggestions = [line for line in suggestions['text'].split('- ') if line.strip()]
- 
+
+                new_ingredients = replace_ingredients(formatted_suggestions, st.session_state.ingredients , replacements)
                 # Start the HTML unordered list
                 html_output = '<ul>'
-
+                
                 # Iterate through the suggestions, applying the alternate colors
                 for idx, topic in enumerate(formatted_suggestions):
                     color = 'darkblue' if idx % 2 == 0 else 'darkgreen'
@@ -101,7 +103,8 @@ if st.session_state.recipe_displayed:
 
                 # Write the HTML to the Streamlit app
                 st.markdown(html_output, unsafe_allow_html=True)
-
+                if st.button('Send the grocery list to my phone'):
+                    pywhatkit.sendwhatmsg_to_group_instantly(st.secrets["group_link"], new_ingredients)
                 st.stop()
             
 st.caption("Made with ❤️ by Pranav")
