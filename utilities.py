@@ -3,8 +3,7 @@ import streamlit as st
 from datetime import datetime
 import pywhatkit
 import time,webbrowser,pyautogui
-
-
+import pandas as pd
 
 def scrape_valid_recipe(url):
     scraper = scrape_me(url)
@@ -45,5 +44,5 @@ def replace_ingredients(output, ingredients, replacement_list):
 def check_ingredients(ingredients_input):
     all_products_loaded_df = pd.read_csv('all_products.csv')
     all_products_loaded = all_products_loaded_df['product_name'].values
-    ingredients_list = [item.strip().lower() for item in ingredients_input.split(',')]
+    ingredients_list = [item.strip().lower() for item in ingredients_input]
     return all(any(ingredient in product for product in all_products_loaded) for ingredient in ingredients_list)
