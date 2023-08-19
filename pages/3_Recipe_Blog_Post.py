@@ -41,15 +41,19 @@ with st.form("my_recipe"):
         print("You submitted the following recipe:")
 
 if st.session_state.blog_displayed:
-    colored_header(
-                label="Your blog post is ready!: ",
+
+    
+    theme = st.selectbox(label = "Select theme for blog post", options = ["Cultural Exploration", "Healthy Living and Nutritional Focus", "Seasonal and Farm-to-Table Experience","Family and Comfort Cooking"])
+    
+    if theme:
+
+        colored_header(
+                label="Your blog post is ready! : ",
                 description="GourmetGhostwriter",
                 color_name="violet-70",
             )
-    theme = st.selectbox(label = "Select theme for blog post", options = ["Cultural Exploration", "Healthy Living and Nutritional Focus", "Seasonal and Farm-to-Table Experience","Family and Comfort Cooking"])
-    st.write(theme)
     
-
+        st.write(theme)
     
         
 
