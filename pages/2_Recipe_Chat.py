@@ -7,6 +7,7 @@ import time
 from utilities import scrape_valid_recipe,check_ingredients,replace_ingredients
 from ingredientguru import get_suggestions
 from streamlit_extras.colored_header import colored_header
+
 import pywhatkit
 
 
@@ -90,6 +91,7 @@ if st.session_state.recipe_displayed:
                 formatted_suggestions = [line for line in suggestions['text'].split('- ') if line.strip()]
 
                 new_ingredients = replace_ingredients(formatted_suggestions, st.session_state.ingredients , replacements)
+                message = '\n'.join(new_ingredients)
                 # Start the HTML unordered list
                 html_output = '<ul>'
                 
@@ -104,7 +106,8 @@ if st.session_state.recipe_displayed:
                 # Write the HTML to the Streamlit app
                 st.markdown(html_output, unsafe_allow_html=True)
                 if st.button('Send the grocery list to my phone'):
-                    pywhatkit.sendwhatmsg_to_group_instantly(st.secrets["group_link"], new_ingredients)
+                    
+                    pywhatkit.sendwhatmsg_to_group_instantly(st.secrets["group_link"], message)
                 st.stop()
             
 st.caption("Made with ❤️ by Pranav")

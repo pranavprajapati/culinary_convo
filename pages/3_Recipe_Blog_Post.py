@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_extras.colored_header import colored_header
 from utilities import check_valid_ingredients
 from gourmetghostwriter import generate_blog_post
+
 import pandas as pd
 
 def initialize_session():
@@ -44,19 +45,17 @@ with st.form("my_recipe"):
 if st.session_state.blog_displayed:
 
 
-    
     theme = st.selectbox(label = "Select theme for blog post", options = ["Select","Cultural Exploration", "Healthy Living and Nutritional Focus", "Seasonal and Farm-to-Table Experience","Family and Comfort Cooking"],index = 0)
-    
-    
-    generate_blog_post(st.session_state.recipe_title,st.session_state.ingredients_list ,st.session_state.instructions_input ,theme)
+    blog_post = generate_blog_post(st.session_state.recipe_title,st.session_state.ingredients_list ,st.session_state.instructions_input ,theme)
+    if theme != "Select":
 
-    colored_header(
-            label="Your blog post is ready! : ",
-            description="GourmetGhostwriter",
-            color_name="violet-70",
-            )
+        colored_header(
+                label="Your blog post is ready! : ",
+                description="GourmetGhostwriter",
+                color_name="violet-70",
+                )
     
-    # st.write(theme)
+        st.write(blog_post['text'])
 else:
     st.write("Please enter valid ingredients to generate a blog post.")
     

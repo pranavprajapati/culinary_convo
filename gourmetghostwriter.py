@@ -72,8 +72,11 @@ theme_templates = {
 
 def generate_blog_post(title,ing,ins,theme):
     if theme == "Select":
-        return None
+        st.write("Your GourmetGhostwriter is ready!")
     else:
+        llm = ChatOpenAI(temperature=0.6,model_name = "gpt-3.5-turbo",openai_api_key=st.secrets["OPENAI_API_KEY"])
         selected_template = theme_templates[theme]
         prompt_template = PromptTemplate(input_variables=["title", "ingredients","instructions"], template=selected_template)
-    return st.write(selected_template)
+        llm_chain = LLMChain(llm = llm, prompt = prompt_template)
+        output = llm_chain(inputs={"title":title,"ingredients":ing,"instructions":ins})
+        return output
