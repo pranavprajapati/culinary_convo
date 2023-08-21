@@ -6,8 +6,12 @@ import streamlit as st
 
 
 def get_suggestions(title,ing,ins,rep):
-    
+    """Get suggestions for ingredient replacements"""
+
+    # Model With Prompt Layer (Version control for prompt)
     llm = PromptLayerChatOpenAI(temperature=0.6,model_name = "gpt-3.5-turbo",openai_api_key=st.secrets["OPENAI_API_KEY"],pl_tags=["recipe_chat"])
+    
+    # Model with only Open AI
     # llm = ChatOpenAI(temperature=0.6,model_name = "gpt-3.5-turbo",openai_api_key=st.secrets["OPENAI_API_KEY"])
 
     template = """You are an expert chef, specializing in ingredient substitutions. You have the title, 

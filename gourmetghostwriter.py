@@ -3,8 +3,6 @@ from langchain.chat_models import ChatOpenAI
 import streamlit as st
 
 
-## Router Chain
-
 comfort_template = """
 You are an expert food blogger, who values family traditions and comfort cooking.\
 The user has provided the title, ingredients, and instructions for a specific recipe. The user will also provide some \
@@ -18,7 +16,6 @@ Instructions: {instructions}
 
 Write Blog Post:
 """
-
 
 seasonal_farm_two_table_template = """
 You are an expert food blogger, passionate about seasonal and farm-to-table cuisine. \
@@ -71,6 +68,10 @@ theme_templates = {
 }
 
 def generate_blog_post(title,ing,ins,theme):
+    """
+    Generates a blog post based on the user's input
+    """
+    
     if theme == "Select":
         st.write("Your GourmetGhostwriter is ready!")
     else:

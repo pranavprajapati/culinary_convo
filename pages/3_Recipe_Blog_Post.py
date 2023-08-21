@@ -2,7 +2,6 @@ import streamlit as st
 from streamlit_extras.colored_header import colored_header
 from utilities import check_valid_ingredients
 from gourmetghostwriter import generate_blog_post
-
 import pandas as pd
 
 def initialize_session():
@@ -20,8 +19,6 @@ def make_blog_post():
     st.session_state.ingredients_list = [item.split()[-1] for item in st.session_state.ingredients_input.split(',')] if st.session_state.ingredients_input else [] 
     st.session_state.blog_displayed = check_valid_ingredients(st.session_state.ingredients_list)
 
-   
-    #code to get recipe scraped
 
 initialize_session()
 st.title("Your own Flavor Fictionist ✏️")
@@ -31,8 +28,7 @@ with st.form("my_recipe"):
     recipetitle = st.text_input("Enter Recipe Title:",key="recipe_title")
 
     # Recipe Ingredients
-    ingredientsinput = st.text_area(label = "Enter Ingredients (comma-separated):",key="ingredients_input")
-    # ingredients_list = [item.strip() for item in ingredientsinput.split(',')] if ingredientsinput else [] 
+    ingredientsinput = st.text_area(label = "Enter Ingredients (comma-separated):",key="ingredients_input") 
 
     # Recipe Instructions
     instructions = st.text_area(label ="Enter Steps or Instructions:",key="instructions_input")
@@ -59,7 +55,5 @@ if st.session_state.blog_displayed:
 else:
     st.write("Please enter valid ingredients to generate a blog post.")
     
-        
-
 
 st.caption("Made with ❤️ by Pranav")

@@ -1,0 +1,9 @@
+pandas
+streamlit
+streamlit_extras
+pywhatkit
+recipe_scrapers
+langchain
+validators
+os
+promptlayer

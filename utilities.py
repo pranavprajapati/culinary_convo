@@ -6,6 +6,7 @@ import time,webbrowser,pyautogui
 import pandas as pd
 
 def scrape_valid_recipe(url):
+    """Scrape the recipe from the URL and return the ingredients and instructions"""
     scraper = scrape_me(url)
     ingredients = scraper.ingredients()
     instructions = scraper.instructions_list()
@@ -14,6 +15,7 @@ def scrape_valid_recipe(url):
 
 
 def check_ingredients(user_input, ingredients_list):
+    """Check if the user input ingredients are part of the original recipe ingredients"""
     user_ingredients = [ingredient.strip() for ingredient in user_input.split(',')]
 
     for user_ingredient in ingredients_list:
@@ -25,6 +27,7 @@ def check_ingredients(user_input, ingredients_list):
             return False
             
 def replace_ingredients(output, ingredients, replacement_list):
+    """Replace the initial ingredients with the replacement ingredients in the original ingredients list"""
     # Iterate through the replacement list
     for initial_ingredient in replacement_list:
         # Check if the initial ingredient is mentioned in any of the sentences in the output
@@ -42,7 +45,8 @@ def replace_ingredients(output, ingredients, replacement_list):
     return ingredients
 
 def check_valid_ingredients(ingredients_input):
-    all_products_loaded_df = pd.read_csv('all_products.csv')
+    """" Check if the ingredients input by the user are valid """
+    all_products_loaded_df = pd.read_csv('data/all_products.csv')
     all_products_loaded = all_products_loaded_df['product_name'].values
     ingredients_list = [item.strip().lower() for item in ingredients_input]
     return all(any(ingredient in product for product in all_products_loaded) for ingredient in ingredients_list)
