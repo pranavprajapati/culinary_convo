@@ -28,3 +28,5 @@ def get_suggestions(title,ing,ins,rep):
     output = llm_chain(inputs={"title":title,"ingredients":ing,"instructions":ins,"replacements":rep})
 
     return output
+
+

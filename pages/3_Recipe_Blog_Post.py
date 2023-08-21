@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_extras.colored_header import colored_header
-from utilities import check_ingredients
+from utilities import check_valid_ingredients
+from gourmetghostwriter import generate_blog_post
 import pandas as pd
 
 def initialize_session():
@@ -15,8 +16,8 @@ def initialize_session():
 
 def make_blog_post():
     #check if ingredients are valid
-    st.session_state.ingredients_list = [item.strip() for item in st.session_state.ingredients_input.split(',')] if st.session_state.ingredients_input else [] 
-    st.session_state.blog_displayed = check_ingredients(st.session_state.ingredients_list)
+    st.session_state.ingredients_list = [item.split()[-1] for item in st.session_state.ingredients_input.split(',')] if st.session_state.ingredients_input else [] 
+    st.session_state.blog_displayed = check_valid_ingredients(st.session_state.ingredients_list)
 
    
     #code to get recipe scraped
@@ -30,7 +31,7 @@ with st.form("my_recipe"):
 
     # Recipe Ingredients
     ingredientsinput = st.text_area(label = "Enter Ingredients (comma-separated):",key="ingredients_input")
-    ingredients_list = [item.strip() for item in ingredientsinput.split(',')] if ingredientsinput else [] 
+    # ingredients_list = [item.strip() for item in ingredientsinput.split(',')] if ingredientsinput else [] 
 
     # Recipe Instructions
     instructions = st.text_area(label ="Enter Steps or Instructions:",key="instructions_input")
@@ -42,18 +43,22 @@ with st.form("my_recipe"):
 
 if st.session_state.blog_displayed:
 
-    
-    theme = st.selectbox(label = "Select theme for blog post", options = ["Cultural Exploration", "Healthy Living and Nutritional Focus", "Seasonal and Farm-to-Table Experience","Family and Comfort Cooking"])
-    
-    if theme:
 
-        colored_header(
-                label="Your blog post is ready! : ",
-                description="GourmetGhostwriter",
-                color_name="violet-70",
+    
+    theme = st.selectbox(label = "Select theme for blog post", options = ["Select","Cultural Exploration", "Healthy Living and Nutritional Focus", "Seasonal and Farm-to-Table Experience","Family and Comfort Cooking"],index = 0)
+    
+    
+    generate_blog_post(st.session_state.recipe_title,st.session_state.ingredients_list ,st.session_state.instructions_input ,theme)
+
+    colored_header(
+            label="Your blog post is ready! : ",
+            description="GourmetGhostwriter",
+            color_name="violet-70",
             )
     
-        st.write(theme)
+    # st.write(theme)
+else:
+    st.write("Please enter valid ingredients to generate a blog post.")
     
         
 

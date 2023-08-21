@@ -41,7 +41,7 @@ def replace_ingredients(output, ingredients, replacement_list):
                 break  # Move to the next initial ingredient
     return ingredients
 
-def check_ingredients(ingredients_input):
+def check_valid_ingredients(ingredients_input):
     all_products_loaded_df = pd.read_csv('all_products.csv')
     all_products_loaded = all_products_loaded_df['product_name'].values
     ingredients_list = [item.strip().lower() for item in ingredients_input]
