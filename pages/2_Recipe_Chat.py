@@ -7,9 +7,12 @@ import time
 from utilities import scrape_valid_recipe,check_ingredients,replace_ingredients
 from ingredientguru import get_suggestions
 from streamlit_extras.colored_header import colored_header
+import promptlayer
 
 import pywhatkit
-
+from dotenv import load_dotenv, find_dotenv
+_ = load_dotenv(find_dotenv()) # read local .env file
+promptlayer.api_key = os.environ['PROMPTLAYER_API_KEY']
 
 def is_valid_url(url):
     return validators.url(url)
@@ -32,6 +35,8 @@ def get_recipe_detils():
     st.session_state.recipe_displayed = True
 
 initialize_session_state()
+
+
 st.title("Your own Flavor Companion 🤖")
 
 with st.form("my_replacement"):
