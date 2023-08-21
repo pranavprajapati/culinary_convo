@@ -11,4 +11,4 @@ Images Used
 ![Alt Text](data/recipe_chat.gif)
 
 ## Gourmet Ghostwriter
-![Alt Text](data/recipe_blog.gif)
+![Alt Text](https://github.com/pranavprajapati/culinary_convo/blob/main/static/recipe_blog.gif)
