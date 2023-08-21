@@ -163,3 +163,4 @@ cython_debug/
 
 # text logs
 PyWhatKit_DB.txt
+.DS_Store
