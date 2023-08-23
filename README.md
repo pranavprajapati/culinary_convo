@@ -8,7 +8,7 @@ Images Used
 
 
 ## Ingredients Guru
-![Alt Text](data/recipe_chat.gif)
+![Alt Text](https://github.com/pranavprajapati/culinary_convo/blob/main/static/recipe_chat.gif)
 
 ## Gourmet Ghostwriter
 ![Alt Text](https://github.com/pranavprajapati/culinary_convo/blob/main/static/recipe_blog.gif)
