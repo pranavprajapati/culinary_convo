@@ -1,5 +1,5 @@
 # Culinary Convo
-A project that combines natural language processing and culinary creativity, enabling users to engage in dynamic recipe adjustments and blog post creation for their own recipes.
+A project that combines Large Language Models and culinary creativity, enabling users to engage in dynamic recipe adjustments and blog post creation for their own recipes.
 
 ## Features
 
